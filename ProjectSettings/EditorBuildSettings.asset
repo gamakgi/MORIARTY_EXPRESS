@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/game.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 7f1903fb3f2f03c42a67796f9fbddbfc
+  - enabled: 1
+    path: Assets/Scenes/TurnGame.unity
+    guid: 2e23abe5c0363274f94810e3b256ed70
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: 51969652847e1c543ab1f912c3f17427
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2ee16f5c89af3dd49986618682b3a754, type: 3}
   m_UseUCBPForAssetBundles: 0
