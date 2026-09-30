@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 455593904}
+  - component: {fileID: 455593905}
   m_Layer: 0
   m_Name: EnemyAttakManager
   m_TagString: Untagged
@@ -225,6 +226,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &455593905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455593903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcb8e43a39a842468d84ed385c515f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttakManager
+  TurnEnemy: {fileID: 0}
+  _EnemySkillManager: {fileID: 0}
+  TurnEmemy_Have_skills: []
+  Use_Skill: {fileID: 0}
+  _EnemyManaManager: {fileID: 0}
+  _TurnManager: {fileID: 476400196}
 --- !u!1 &476400194
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +293,7 @@ MonoBehaviour:
   TurnendButton: {fileID: 700127307}
   AllyTurn: 0
   Turn_order: []
+  _EnemyAttakManager: {fileID: 455593905}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a4f79faf4f04b4bb87f7160c503f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  enemy: {fileID: 8868728501208105937, guid: c5d742960f305264696bf888ff59e9a3, type: 3}
+  enemy: {fileID: 7824301600723691610, guid: c5d742960f305264696bf888ff59e9a3, type: 3}
   stage1_Emergence_Enemy:
   - {fileID: 11400000, guid: 7b0dd5e3d41704444b6c735157ad569f, type: 2}
   - {fileID: 11400000, guid: 4a79b29602b3cfe44ba8a9b3039ad30e, type: 2}
@@ -996,5 +1016,5 @@ SceneRoots:
   - {fileID: 1781789271}
   - {fileID: 1131812282}
   - {fileID: 476400195}
-  - {fileID: 2102478805}
   - {fileID: 455593904}
+  - {fileID: 2102478805}

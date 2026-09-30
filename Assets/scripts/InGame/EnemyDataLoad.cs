@@ -6,6 +6,7 @@ public class EnemyDataLoad : MonoBehaviour
     private SpriteRenderer _SpriteRenderer;
     private HPscripts _HPscripts;
     private EnemySkillManager _EnemtSkillManager;
+    private EnemyManaManager _EnemyManaManager;
 
     public void Load (Enemy EnemyData)
     {
@@ -16,5 +17,7 @@ public class EnemyDataLoad : MonoBehaviour
         _HPscripts.HP = EnemyData.EnemyHP;
         _EnemtSkillManager = gameObject.GetComponent<EnemySkillManager>();
         _EnemtSkillManager.HaveSkill.AddRange(EnemyData.EnemyHaveSkill);
+        _EnemyManaManager = gameObject.GetComponent<EnemyManaManager>();
+        _EnemyManaManager.Enemy_Have_Mana = EnemyData.EnemyMana;
     }
 }

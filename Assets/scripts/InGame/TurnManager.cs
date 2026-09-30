@@ -11,9 +11,11 @@ public class TurnManager : MonoBehaviour
     //AllyTurn이 true면 아군턴, false면 적군턴
     public bool AllyTurn;
     public List<GameObject> Turn_order = new List<GameObject>();
+    [SerializeField] private EnemyAttakManager _EnemyAttakManager;
     public void Input_Enemt_Turn(GameObject Enemy)
     {
         Turn_order.Add(Enemy);
+        
     }
     public void TurnStart(GameObject nowturn)
     {
@@ -29,6 +31,8 @@ public class TurnManager : MonoBehaviour
         {
             Canvas.gameObject.SetActive(true);
         }
+
+        Canvas.gameObject.SetActive(true);
         
     }
 
@@ -38,9 +42,22 @@ public class TurnManager : MonoBehaviour
         TurnChange();
     }
 
-    void TurnChange()
+    public void TurnChange()
     {
-        NowTurn = Turn_order[turn-1 % Turn_order.Count];
+        for (int i = Turn_order.Count - 1; i >= 0; i--)
+        {
+            if (Turn_order[i] == null)
+            {
+                Turn_order.RemoveAt(i);
+            }
+        }
+
+        if (Turn_order.Count == 0)
+        {
+            return;
+        }
+
+        NowTurn = Turn_order[(turn - 1) % Turn_order.Count];
         turn += 1;
         if (NowTurn.tag == "Holmes" || NowTurn.tag == "Watson")
         {
@@ -48,7 +65,11 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            TurnendButton.SetActive(false);
+            if (TurnendButton.activeSelf)
+            {
+                TurnendButton.SetActive(false);
+            }
+            _EnemyAttakManager.TurnEnemyInput(NowTurn);
         }
     }
 }
