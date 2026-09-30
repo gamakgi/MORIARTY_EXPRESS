@@ -15,4 +15,6 @@ MonoBehaviour:
   EnemyName: 
   EnemySprite: {fileID: -5760042122168661746, guid: 9d8e37fba19dd314a9c5fa40b7813bd9, type: 3}
   EnemyHP: 30
-  EnemyHaveSkill: []
+  EnemyHaveSkill:
+  - {fileID: 11400000, guid: 01abce75554a07840b85e47b446a072f, type: 2}
+  - {fileID: 11400000, guid: 677f58a795b6b8d45a800a869cd409a8, type: 2}

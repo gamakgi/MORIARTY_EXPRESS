@@ -6,8 +6,9 @@ public class SkillButtonCreat : MonoBehaviour
     public List<Skill> HaveSkill;
     public GameObject _Skillbutton;
     [SerializeField] private Vector2 spawnPosition;
-    [SerializeField] private RectTransform buttonParent;
-    void Start()
+    public RectTransform buttonParent;
+    public bool ifSkillCreat = true;
+    public void SkillCreate()
     {
         int Skillcount = 0;
 
@@ -20,6 +21,7 @@ public class SkillButtonCreat : MonoBehaviour
             button.SkillPush(skill);
             Skillcount++;
         }
+        ifSkillCreat =  false;
     }
 }
 

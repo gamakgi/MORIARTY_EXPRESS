@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 6538902248420424902}
   - component: {fileID: 3294871136394368606}
   - component: {fileID: 6482421426458666682}
+  - component: {fileID: 4937185265696761699}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -365,6 +366,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932084faef35a0845b9de53e5e72f715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataLoad
+--- !u!114 &4937185265696761699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598340448668615075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff4c843e1199d14abbf482fe34dee56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySkillManager
+  HaveSkill: []
 --- !u!1 &8650767701225190080
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +407,7 @@ RectTransform:
   m_GameObject: {fileID: 8650767701225190080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2.0631, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7581860118722894258}
@@ -402,7 +416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1.526694}
+  m_AnchoredPosition: {x: 0, y: -1}
   m_SizeDelta: {x: 2, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2162368922283082529
