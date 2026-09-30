@@ -702,6 +702,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711930970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2457073445508783133, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+  m_PrefabInstance: {fileID: 4007478670679384945}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1781789269
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,13 +1009,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4007478670679384951}
   m_SourcePrefab: {fileID: 100100000, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
 --- !u!1 &4007478670679384946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
   m_PrefabInstance: {fileID: 4007478670679384945}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4007478670679384951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4007478670679384946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32040228074ee2f4da3589453d270cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaterHPManager
+  MaxHP: 0
+  HP: 0
+  HPbar: {fileID: 1711930970}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

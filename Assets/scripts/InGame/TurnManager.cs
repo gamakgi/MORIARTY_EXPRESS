@@ -12,10 +12,11 @@ public class TurnManager : MonoBehaviour
     public bool AllyTurn;
     public List<GameObject> Turn_order = new List<GameObject>();
     [SerializeField] private EnemyAttakManager _EnemyAttakManager;
+    private EnemyManaManager _EnemyManaManager;
+    private ManaManager _ManaManager;
     public void Input_Enemt_Turn(GameObject Enemy)
     {
         Turn_order.Add(Enemy);
-        
     }
     public void TurnStart(GameObject nowturn)
     {
@@ -62,6 +63,9 @@ public class TurnManager : MonoBehaviour
         if (NowTurn.tag == "Holmes" || NowTurn.tag == "Watson")
         {
             TurnStart(NowTurn);
+            _ManaManager = NowTurn.GetComponent<ManaManager>();
+            _ManaManager.Mana = 3;
+            _ManaManager.ManaTextChange();
         }
         else
         {
@@ -69,6 +73,8 @@ public class TurnManager : MonoBehaviour
             {
                 TurnendButton.SetActive(false);
             }
+            _EnemyManaManager = NowTurn.GetComponent<EnemyManaManager>();
+            _EnemyManaManager.Enemy_Have_Mana = 3;
             _EnemyAttakManager.TurnEnemyInput(NowTurn);
         }
     }
