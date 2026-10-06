@@ -34,7 +34,7 @@ public class Skillbutton : MonoBehaviour
             }
             else
             {
-                Debug.LogError("마나 없어여...뜌");
+                Debug.Log("마나 없어여...뜌");
             }
         }
     }

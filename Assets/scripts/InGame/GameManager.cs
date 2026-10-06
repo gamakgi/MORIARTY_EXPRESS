@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public static bool WatsonAlive = true;
     [SerializeField] private TurnManager _TurnManager;
     [SerializeField] private GameObject Sherlock_Holmes;
+    [SerializeField] private EnemyAttakManager _EnemyAttakManager;
+    
 
     // list의 몇 번째 몹을 소환할지
     private int list1;
@@ -44,10 +46,12 @@ public class GameManager : MonoBehaviour
         if (WatsonAlive)
         {
             GameObject Watson = Instantiate(John_Watson, WatsonVector3, Quaternion.identity);
+            _EnemyAttakManager.WatsonObjectInput(Watson);
             _TurnManager.Turn_order.Insert(0, Watson);
         }
-
+        
         _TurnManager.TurnStart(Sherlock_Holmes);
+        _EnemyAttakManager.HolmesObjectInput(Sherlock_Holmes);
         _TurnManager.Turn_order.Insert(0, Sherlock_Holmes);
     }
 }

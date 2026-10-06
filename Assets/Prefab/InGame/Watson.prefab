@@ -655,12 +655,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8103508495265477142, guid: 6803380d438eec040b3ed6e5c1ce1f30, type: 3}
+  m_Sprite: {fileID: -467050966184054042, guid: 306eefe174ccecd44a0d8739f9ebf4ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.5105739, y: 4.44}
+  m_Size: {x: 1.93, y: 2.485}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -710,8 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32040228074ee2f4da3589453d270cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHPManager
-  MaxHP: 0
-  HP: 0
+  MaxHP: 30
+  HP: 30
   HPbar: {fileID: 5551890078763761109}
 --- !u!1 &6147119618628608503
 GameObject:

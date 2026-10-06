@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pig
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   EnemyName: "\uB3CC\uC9C4 \uB3FC\uC9C0"
-  EnemySprite: {fileID: 6882543378483818793, guid: aa470edc072bd9e4cb06164954fd9608, type: 3}
+  EnemySprite: {fileID: 771773968928356631, guid: e83a4240f4c15874694906ae304698b7, type: 3}
   EnemyHP: 20
   EnemyMana: 3
   EnemyHaveSkill:

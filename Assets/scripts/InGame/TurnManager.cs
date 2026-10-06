@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
         NowTurn = nowturn;
         _SkillButtonCreat = nowturn.GetComponent<SkillButtonCreat>();
         Canvas = _SkillButtonCreat.buttonParent;
-        if (_SkillButtonCreat)
+        if (_SkillButtonCreat.ifSkillCreat == false)
         {
             _SkillButtonCreat.SkillCreate();
         }
@@ -32,9 +32,6 @@ public class TurnManager : MonoBehaviour
         {
             Canvas.gameObject.SetActive(true);
         }
-
-        Canvas.gameObject.SetActive(true);
-        
     }
 
     public void TurnEnd()

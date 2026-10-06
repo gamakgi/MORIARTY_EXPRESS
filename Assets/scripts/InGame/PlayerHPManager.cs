@@ -19,7 +19,14 @@ public class PlayerHPManager : MonoBehaviour
         HP -= Damage;
         if (((float)HP / (float)MaxHP) <= 0)
         {
-            Destroy(gameObject);
+            if (gameObject.tag == "Holmes")
+            {
+                GameOverScript.Game_OVER();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {

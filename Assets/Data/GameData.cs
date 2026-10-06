@@ -9,7 +9,7 @@ public class GameData : MonoBehaviour
     public List<Skill> HaveSkill;
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);  
     }
     
 }

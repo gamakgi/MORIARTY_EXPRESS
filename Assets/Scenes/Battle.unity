@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5962689061485224524, guid: 37ef0791dd8582f4d9bdfb761132171f, type: 3}
+  m_Sprite: {fileID: 1812906440, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -244,6 +244,9 @@ MonoBehaviour:
   Use_Skill: {fileID: 0}
   _EnemyManaManager: {fileID: 0}
   _TurnManager: {fileID: 476400196}
+  Holmes: {fileID: 0}
+  Watson: {fileID: 0}
+  _playerHPManager: {fileID: 0}
 --- !u!1 &476400194
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +690,7 @@ MonoBehaviour:
   John_Watson: {fileID: 4706920287522478438, guid: 12af779a94c893646a47b06b88c1f0cd, type: 3}
   _TurnManager: {fileID: 476400196}
   Sherlock_Holmes: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+  _EnemyAttakManager: {fileID: 455593905}
 --- !u!4 &1131812282
 Transform:
   m_ObjectHideFlags: 0
@@ -702,17 +706,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1711930970 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2457073445508783133, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
-  m_PrefabInstance: {fileID: 4007478670679384945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1781789269
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,10 +987,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Holmes
       objectReference: {fileID: 0}
-    - target: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
-      propertyPath: m_TagString
-      value: Holmes
-      objectReference: {fileID: 0}
     - target: {fileID: 5981573038790232258, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1006,34 +995,24 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8369554144002249936, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+      propertyPath: HaveSkill.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369554144002249936, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+      propertyPath: 'HaveSkill.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b7ff1f2ed0b3a144ae82ca06a84803c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4007478670679384951}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
 --- !u!1 &4007478670679384946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
   m_PrefabInstance: {fileID: 4007478670679384945}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4007478670679384951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4007478670679384946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32040228074ee2f4da3589453d270cd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaterHPManager
-  MaxHP: 0
-  HP: 0
-  HPbar: {fileID: 1711930970}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
