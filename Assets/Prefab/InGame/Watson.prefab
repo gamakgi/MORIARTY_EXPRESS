@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 1781160374749769036}
   - component: {fileID: 146008403117535009}
   - component: {fileID: 4076601480962547521}
+  - component: {fileID: 3825223243960465417}
   m_Layer: 0
   m_Name: Watson
   m_TagString: Watson
@@ -713,6 +714,20 @@ MonoBehaviour:
   MaxHP: 30
   HP: 30
   HPbar: {fileID: 5551890078763761109}
+--- !u!114 &3825223243960465417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706920287522478438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2949119df11837e45bd3101687e64dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLoad
+  _SkillButtonCreat: {fileID: 0}
+  _PlayerHPManager: {fileID: 0}
 --- !u!1 &6147119618628608503
 GameObject:
   m_ObjectHideFlags: 0

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1812906440, guid: 080cb6d98b00c2645b2c41df5f69bc78, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -194,6 +194,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262701638}
   m_CullTransparentMesh: 1
+--- !u!1 &303143918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303143920}
+  - component: {fileID: 303143919}
+  m_Layer: 0
+  m_Name: EnemyDeadManager
+  m_TagString: EnemyDead
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &303143919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303143918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2286cea1e35b4b4eb46650a2fc52abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDead
+  Alive_Enemy_Count: 0
+--- !u!4 &303143920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303143918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.20491, y: -1.33641, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455593903
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +337,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   NowTurn: {fileID: 4007478670679384946}
-  turn: 2
   TurnendButton: {fileID: 700127307}
   AllyTurn: 0
   Turn_order: []
@@ -691,6 +735,10 @@ MonoBehaviour:
   _TurnManager: {fileID: 476400196}
   Sherlock_Holmes: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
   _EnemyAttakManager: {fileID: 455593905}
+  if1creat: 1
+  if2creat: 1
+  if3creat: 1
+  _EnemyDead: {fileID: 303143919}
 --- !u!4 &1131812282
 Transform:
   m_ObjectHideFlags: 0
@@ -1006,13 +1054,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4007478670679384952}
   m_SourcePrefab: {fileID: 100100000, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
 --- !u!1 &4007478670679384946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5352213371878386189, guid: ef9d075be0d58ab4c810d7c388728fe8, type: 3}
   m_PrefabInstance: {fileID: 4007478670679384945}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4007478670679384952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4007478670679384946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2949119df11837e45bd3101687e64dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLoad
+  _SkillButtonCreat: {fileID: 0}
+  _PlayerHPManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1026,3 +1091,4 @@ SceneRoots:
   - {fileID: 476400195}
   - {fileID: 455593904}
   - {fileID: 2102478805}
+  - {fileID: 303143920}

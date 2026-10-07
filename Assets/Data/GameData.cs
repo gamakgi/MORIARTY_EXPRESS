@@ -2,14 +2,14 @@ using UnityEngine;
 using System.Collections.Generic;
 public class GameData : MonoBehaviour
 {
-    public int HolmesHP;
-    public int HolmesMaxHP;
-    public int watsonHP;
-    public int watsonMaxHP;
-    public List<Skill> HaveSkill;
+    public static int HolmesHP;
+    public static int HolmesMaxHP;
+    public static int WatsonHP;
+    public static int WatsonMaxHP;
+    public static List<Skill> HolmesHaveSkill;
+    public static List<Skill> WatsonHaveSkill;
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);  
+        DontDestroyOnLoad(gameObject);
     }
-    
 }

@@ -7,6 +7,7 @@ TagManager:
   - Attak_Manager
   - Holmes
   - Watson
+  - GameData
   layers:
   - Default
   - TransparentFX

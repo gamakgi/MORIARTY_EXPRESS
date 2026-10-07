@@ -8,10 +8,11 @@ public class PlayerHPManager : MonoBehaviour
     private RectTransform _RectTransform;
     
 
-    void OnEnable()
+    void Start()
     {
         _RectTransform = HPbar.GetComponent<RectTransform>();
         _RectTransform.localScale =new Vector3((float)HP / (float)MaxHP, 1f, 1f);
+        HP_change(0);
     }
 
     public void HP_change(int Damage)

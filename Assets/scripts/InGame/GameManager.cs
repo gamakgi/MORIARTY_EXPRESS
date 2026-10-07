@@ -16,32 +16,49 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TurnManager _TurnManager;
     [SerializeField] private GameObject Sherlock_Holmes;
     [SerializeField] private EnemyAttakManager _EnemyAttakManager;
-    
+    public bool if1creat = true;
+    public bool if2creat = true;
+    public bool if3creat = true;
+    [SerializeField] private EnemyDead _EnemyDead;
 
     // list의 몇 번째 몹을 소환할지
     private int list1;
 
     void Start()
     {
-        Sherlock_Holmes = GameObject.FindWithTag("Holmes");  
+        int CreatCout = 0;
+        if (if1creat)
+        {
+            Sherlock_Holmes = GameObject.FindWithTag("Holmes");
+            list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
+            GameObject InstantiateEnemy1 = Instantiate(enemy, offset1, Quaternion.identity);
+            EnemyDataLoad EnemyData1 = InstantiateEnemy1.GetComponentInChildren<EnemyDataLoad>();
+            EnemyData1.Load(stage1_Emergence_Enemy[list1]);
+            _TurnManager.Input_Enemt_Turn(InstantiateEnemy1);
+            CreatCout++;
+        }
         
-        list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
-        GameObject InstantiateEnemy1 = Instantiate(enemy, offset1, Quaternion.identity);
-        EnemyDataLoad EnemyData1 = InstantiateEnemy1.GetComponentInChildren<EnemyDataLoad>();
-        EnemyData1.Load(stage1_Emergence_Enemy[list1]);
-        _TurnManager.Input_Enemt_Turn(InstantiateEnemy1);
-        
-        list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
-        GameObject InstantiateEnemy2 = Instantiate(enemy, offset2, Quaternion.identity);
-        EnemyDataLoad EnemyData2 = InstantiateEnemy2.GetComponentInChildren<EnemyDataLoad>();
-        EnemyData2.Load(stage1_Emergence_Enemy[list1]);
-        _TurnManager.Input_Enemt_Turn(InstantiateEnemy2);
-        
-        list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
-        GameObject InstantiateEnemy3 = Instantiate(enemy, offset3, Quaternion.identity);
-        EnemyDataLoad EnemyData3 = InstantiateEnemy3.GetComponentInChildren<EnemyDataLoad>();
-        EnemyData3.Load(stage1_Emergence_Enemy[list1]);
-        _TurnManager.Input_Enemt_Turn(InstantiateEnemy3);
+        if (if2creat)
+        {
+            Sherlock_Holmes = GameObject.FindWithTag("Holmes");
+            list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
+            GameObject InstantiateEnemy2 = Instantiate(enemy, offset2, Quaternion.identity);
+            EnemyDataLoad EnemyData2 = InstantiateEnemy2.GetComponentInChildren<EnemyDataLoad>();
+            EnemyData2.Load(stage1_Emergence_Enemy[list1]);
+            _TurnManager.Input_Enemt_Turn(InstantiateEnemy2);
+            CreatCout++;
+        }
+
+        if (if3creat)
+        {
+            Sherlock_Holmes = GameObject.FindWithTag("Holmes");
+            list1 = Random.Range(0, stage1_Emergence_Enemy.Count);
+            GameObject InstantiateEnemy3 = Instantiate(enemy, offset3, Quaternion.identity);
+            EnemyDataLoad EnemyData3 = InstantiateEnemy3.GetComponentInChildren<EnemyDataLoad>();
+            EnemyData3.Load(stage1_Emergence_Enemy[list1]);
+            _TurnManager.Input_Enemt_Turn(InstantiateEnemy3);
+            CreatCout++;
+        }
 
         if (WatsonAlive)
         {
@@ -53,5 +70,7 @@ public class GameManager : MonoBehaviour
         _TurnManager.TurnStart(Sherlock_Holmes);
         _EnemyAttakManager.HolmesObjectInput(Sherlock_Holmes);
         _TurnManager.Turn_order.Insert(0, Sherlock_Holmes);
+
+        _EnemyDead.Alive_Enemy_Count = CreatCout;
     }
 }
