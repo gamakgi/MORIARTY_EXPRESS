@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HexTileView : MonoBehaviour
 {
@@ -17,10 +16,18 @@ public class HexTileView : MonoBehaviour
             return;
         }
 
+        MapLoadingScreen loadingScreen =
+            FindFirstObjectByType<MapLoadingScreen>();
+
+        if (loadingScreen == null || loadingScreen.IsTransitioning)
+        {
+            return;
+        }
+
         // Battle 타일을 클릭했을 때
         if (tile.type == TileType.Battle)
         {
-            SceneManager.LoadScene("Battle");
+            loadingScreen.LoadBattle();
         }
     }
 

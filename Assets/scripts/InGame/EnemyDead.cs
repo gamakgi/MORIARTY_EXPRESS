@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class EnemyDead : MonoBehaviour
 {
     public int Alive_Enemy_Count;
@@ -11,15 +10,15 @@ public class EnemyDead : MonoBehaviour
         Alive_Enemy_Count -= 1;
         if (Alive_Enemy_Count <= 0)
         {
-            GameObject holmes = GameObject.FindWithTag("Holmes");
-            _PlayerHPManager = holmes.GetComponent<PlayerHPManager>();
-            GameData.HolmesHP = _PlayerHPManager.HP;
-            GameData.HolmesMaxHP = _PlayerHPManager.MaxHP;
-            GameObject watson = GameObject.FindWithTag("Watson");
-            _PlayerHPManager = watson.GetComponent<PlayerHPManager>();
-            GameData.WatsonHP = _PlayerHPManager.HP;
+                GameObject holmes = GameObject.FindWithTag("Holmes");
+                _PlayerHPManager = holmes.GetComponent<PlayerHPManager>();
+                GameData.HolmesHP = _PlayerHPManager.HP;
+                GameData.HolmesMaxHP = _PlayerHPManager.MaxHP;
+                GameObject watson = GameObject.FindWithTag("Watson");
+                _PlayerHPManager = watson.GetComponent<PlayerHPManager>();
+                GameData.WatsonHP = _PlayerHPManager.HP;
             GameData.WatsonMaxHP = _PlayerHPManager.MaxHP;
-            SceneManager.LoadScene("Map");
+            SceneTransitionManager.LoadScene("Map");
         }
     }
 }
