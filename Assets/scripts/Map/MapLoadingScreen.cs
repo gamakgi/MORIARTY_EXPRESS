@@ -7,9 +7,4 @@ public class MapLoadingScreen : MonoBehaviour
     {
         get { return SceneTransitionManager.IsTransitioning; }
     }
-
-    public void LoadBattle()
-    {
-        SceneTransitionManager.LoadScene("Battle");
-    }
 }

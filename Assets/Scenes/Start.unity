@@ -207,6 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc4302e45291074e906287c5e3ebb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameData
+  SavedMapTiles: []
+  SavedMapPlayerCoord: {x: 0, y: 0}
+  SavedMapTurnCount: 0
+  HasSavedMap: 0
 --- !u!1 &759262399
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,6 +388,8 @@ MonoBehaviour:
   StartWatsonHaveSkill:
   - {fileID: 11400000, guid: 01abce75554a07840b85e47b446a072f, type: 2}
   - {fileID: 11400000, guid: 677f58a795b6b8d45a800a869cd409a8, type: 2}
+  MysteryList:
+  - {fileID: 11400000, guid: 11c321394c7709a4298f3cc9f8fd62c3, type: 2}
 --- !u!4 &796516492
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class StartSkillLoad : MonoBehaviour
     [SerializeField] int StartWatsonMaxHP;
     [SerializeField] List<Skill> StartHolmesHaveSkill;
     [SerializeField] List<Skill> StartWatsonHaveSkill;
+    [SerializeField] List<MysteryType> MysteryList;
     void Start()
     {
         GameData.HolmesHP = StartHolmesHP;
@@ -16,5 +17,6 @@ public class StartSkillLoad : MonoBehaviour
         GameData.WatsonMaxHP = StartWatsonMaxHP;
         GameData.HolmesHaveSkill = StartHolmesHaveSkill;
         GameData.WatsonHaveSkill = StartWatsonHaveSkill;
+        GameData.MysteryList = MysteryList;
     }
 }

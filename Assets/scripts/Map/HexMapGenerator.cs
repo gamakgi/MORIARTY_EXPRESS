@@ -10,11 +10,11 @@ public enum TileType
     Event,
     Rest,
     Mystery,
-    Boss
+    Boss,
+    Null
 }
 
-[Serializable]
-public class TileWeight
+[Serializable] public class TileWeight
 {
     public TileType type;
     public float weight;
@@ -42,6 +42,8 @@ public class HexMapGenerator : MonoBehaviour
 
     [Header("Map")]
     public int MapSize = 5;
+    public int Recommended_number_of_turns = 20;
+    [Min(0.01f)] public float NullTileTurnCost = 0.5f;
 
     [Header("Hex")]
     public float HexSize = 1.0f;
@@ -62,6 +64,7 @@ public class HexMapGenerator : MonoBehaviour
     public GameObject TresurePrefab;
     public GameObject BossPrefab;
     public GameObject NullPrefab;
+    public GameObject PlayerSpritePrefab;
 
 
     // ========================================
@@ -149,6 +152,12 @@ public class HexMapGenerator : MonoBehaviour
     public Dictionary<Vector2Int, HexTileData> Tiles =
         new Dictionary<Vector2Int, HexTileData>();
 
+    private Vector2Int playerCoord;
+    private GameObject playerMarker;
+    private GameData gameData;
+    private MapTurnCounter mapTurnCounter;
+    private float turnCount;
+
 
     private System.Random random;
 
@@ -185,55 +194,44 @@ public class HexMapGenerator : MonoBehaviour
         }
 
         random = new System.Random(Seed);
+        gameData = FindFirstObjectByType<GameData>();
+        mapTurnCounter = GetComponent<MapTurnCounter>();
+        if (mapTurnCounter == null)
+            mapTurnCounter = FindFirstObjectByType<MapTurnCounter>();
 
-        // ------------------------------------
-        // 데이터 생성
-        // ------------------------------------
-
-        for (int x = -MapSize; x <= MapSize; x++)
+        if (gameData != null && gameData.HasSavedMap)
         {
-            for (int y = -MapSize; y <= MapSize; y++)
+            foreach (HexTileData savedTile in gameData.SavedMapTiles)
+                Tiles.Add(savedTile.coord, new HexTileData(savedTile.coord, savedTile.type));
+            playerCoord = gameData.SavedMapPlayerCoord;
+            turnCount = gameData.SavedMapTurnCount;
+        }
+        else
+        {
+            for (int x = -MapSize; x <= MapSize; x++)
             {
-                if (Mathf.Abs(x + y) > MapSize)
+                for (int y = -MapSize; y <= MapSize; y++)
                 {
-                    continue;
+                    if (Mathf.Abs(x + y) > MapSize)
+                        continue;
+                    Vector2Int coord = new Vector2Int(x, y);
+                    Tiles.Add(coord, new HexTileData(coord, GetRandomTileType()));
                 }
-
-                Vector2Int coord =
-                    new Vector2Int(x, y);
-
-                TileType type =
-                    GetRandomTileType();
-
-                HexTileData tile =
-                    new HexTileData(coord, type);
-
-                Tiles.Add(coord, tile);
             }
+            RepairTiles();
+            SetRandomBossTile();
+            playerCoord = Vector2Int.zero;
+            Tiles[playerCoord].type = TileType.Null;
+            turnCount = 0;
         }
 
-        // ------------------------------------
-        // 타일 수리
-        // ------------------------------------
-
-        RepairTiles();
-
-        // ------------------------------------
-        // Boss
-        // ------------------------------------
-
-        SetRandomBossTile();
-
-        // ------------------------------------
-        // 실제 오브젝트 생성
-        // ------------------------------------
-
+        if (mapTurnCounter != null)
+            mapTurnCounter.SetTurn(turnCount, Recommended_number_of_turns);
         CreateTiles();
-
-        Debug.Log(
-            "Hex Map 생성 완료 / 타일 수 : " +
-            Tiles.Count
-        );
+        CreatePlayerMarker();
+        UpdateAvailableMoves();
+        SaveMapRun();
+        Debug.Log("Hex Map 생성 완료 / 타일 수 : " + Tiles.Count);
     }
 
 
@@ -362,35 +360,38 @@ public class HexMapGenerator : MonoBehaviour
                     continue;
                 }
 
-                bool same = true;
+                TileType repeatedType = neighbors[0].type;
+                List<HexTileData> repeatedNeighbors = new List<HexTileData>();
 
                 for (int i = 0; i < neighbors.Count; i++)
                 {
-                    if (neighbors[i].type != tile.type)
+                    List<HexTileData> sameTypeNeighbors = new List<HexTileData>();
+
+                    for (int j = 0; j < neighbors.Count; j++)
                     {
-                        same = false;
+                        if (neighbors[j].type == neighbors[i].type)
+                        {
+                            sameTypeNeighbors.Add(neighbors[j]);
+                        }
+                    }
+
+                    if (sameTypeNeighbors.Count >= 5)
+                    {
+                        repeatedType = neighbors[i].type;
+                        repeatedNeighbors = sameTypeNeighbors;
                         break;
                     }
                 }
 
-                if (same)
+                if (repeatedNeighbors.Count >= 5)
                 {
-                    TileType newType =
-                        GetOtherTileType(tile.type);
+                    TileType newType = GetOtherTileType(repeatedType);
 
-                    if (newType != tile.type)
+                    if (newType != repeatedType)
                     {
-                        int randomNumber =
-                            random.Next(
-                                0,
-                                neighbors.Count
-                            );
-
-                        HexTileData target =
-                            neighbors[randomNumber];
-
+                        int randomNumber = random.Next(0, repeatedNeighbors.Count);
+                        HexTileData target = repeatedNeighbors[randomNumber];
                         target.type = newType;
-
                         changed = true;
                     }
                 }
@@ -610,7 +611,7 @@ public class HexMapGenerator : MonoBehaviour
                 tileObject.AddComponent<HexTileView>();
         }
 
-        tileView.SetTile(tile);
+        tileView.SetTile(tile, this);
 
 
         // 데이터에 오브젝트 저장
@@ -659,9 +660,125 @@ public class HexMapGenerator : MonoBehaviour
 
             case TileType.Boss:
                 return BossPrefab;
+
+            case TileType.Null:
+                return NullPrefab;
         }
 
         return null;
+    }
+
+    private Vector3 GetTileLocalPosition(Vector2Int coord)
+    {
+        float horizontal = HexSize * 1.5f;
+        float vertical = HexSize * Mathf.Sqrt(3f);
+        float spacing = 1f + TileSpacing;
+        return new Vector3(coord.x * horizontal * spacing,
+            (coord.y + coord.x * 0.5f) * vertical * spacing, 0f);
+    }
+
+    private void CreatePlayerMarker()
+    {
+        if (playerMarker != null)
+            Destroy(playerMarker);
+
+        playerMarker = new GameObject("MapPlayer");
+        playerMarker.transform.SetParent(TileParent, false);
+        playerMarker.transform.localPosition = GetTileLocalPosition(playerCoord) + new Vector3(0f, 0f, -0.1f);
+        playerMarker.transform.localScale = Vector3.one * TileScale / 3f;
+
+        SpriteRenderer playerRenderer = playerMarker.AddComponent<SpriteRenderer>();
+        SpriteRenderer sourceRenderer = PlayerSpritePrefab != null ? PlayerSpritePrefab.GetComponent<SpriteRenderer>() : null;
+        if (sourceRenderer != null)
+        {
+            playerRenderer.sprite = sourceRenderer.sprite;
+            playerRenderer.color = sourceRenderer.color;
+            playerRenderer.flipX = sourceRenderer.flipX;
+        }
+        playerRenderer.sortingOrder = 10;
+    }
+
+    public void MovePlayer(HexTileData destination)
+    {
+        if (destination == null)
+            return;
+
+        bool isNeighbor = false;
+        List<HexTileData> neighbors = GetNeighbors(playerCoord);
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            if (neighbors[i] == destination)
+            {
+                isNeighbor = true;
+                break;
+            }
+        }
+        if (!isNeighbor)
+            return;
+
+        TileType destinationType = destination.type;
+        Debug.Log("밟은 타일 종류: " + destinationType);
+        playerCoord = destination.coord;
+        if (destinationType == TileType.Null)
+            turnCount += NullTileTurnCost;
+        else
+            turnCount += 1f;
+        if (mapTurnCounter != null)
+            mapTurnCounter.SetTurn(turnCount, Recommended_number_of_turns);
+        ChangeTileToNull(destination);
+        playerMarker.transform.localPosition = GetTileLocalPosition(playerCoord) + new Vector3(0f, 0f, -0.1f);
+        UpdateAvailableMoves();
+        SaveMapRun();
+
+        if (destinationType == TileType.Battle)
+            SceneTransitionManager.LoadScene("Battle");
+        if (destinationType == TileType.Mystery)
+            SceneTransitionManager.LoadScene("Mystery");
+        //여기에여
+        
+    }
+
+    private void ChangeTileToNull(HexTileData tile)
+    {
+        tile.type = TileType.Null;
+        if (tile.tileObject != null && NullPrefab != null)
+        {
+            SpriteRenderer currentRenderer = tile.tileObject.GetComponent<SpriteRenderer>();
+            SpriteRenderer nullRenderer = NullPrefab.GetComponent<SpriteRenderer>();
+            if (currentRenderer != null && nullRenderer != null)
+            {
+                currentRenderer.sprite = nullRenderer.sprite;
+                currentRenderer.color = nullRenderer.color;
+            }
+            for (int i = 0; i < tile.tileObject.transform.childCount; i++)
+                tile.tileObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        HexTileView view = tile.tileObject != null ? tile.tileObject.GetComponent<HexTileView>() : null;
+        if (view != null)
+            view.SetTile(tile, this);
+    }
+
+    private void UpdateAvailableMoves()
+    {
+        foreach (HexTileData tile in Tiles.Values)
+        {
+            HexTileView view = tile.tileObject != null ? tile.tileObject.GetComponent<HexTileView>() : null;
+            if (view != null)
+                view.SetMoveAvailable(false);
+        }
+        List<HexTileData> neighbors = GetNeighbors(playerCoord);
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            HexTileView view = neighbors[i].tileObject != null ? neighbors[i].tileObject.GetComponent<HexTileView>() : null;
+            if (view != null)
+                view.SetMoveAvailable(true);
+        }
+    }
+
+    private void SaveMapRun()
+    {
+        if (gameData != null)
+            gameData.SaveMapRun(Tiles, playerCoord, turnCount);
     }
 
 
